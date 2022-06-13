@@ -40,7 +40,9 @@ export const registerUser = expressAsyncHandler(async (req:Request, res: Respons
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user.id),
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            token: generateToken(user._id),
         })
     }else {
         res.status(400)
@@ -62,7 +64,9 @@ export const loginUser = expressAsyncHandler(async (req:Request, res:Response) =
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user.id),
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            token: generateToken(user._id),
         })
     }else {
         res.status(400)
@@ -77,7 +81,7 @@ const generateToken = (id:ObjectId) => {
     if (process.env.JWT_SECRET) {
         secret = process.env.JWT_SECRET
     } else {
-    throw new Error("MONGO_URI environment variable is not set")
+    throw new Error("JWT_SECRET environment variable is not set")
     }
 
     return jwt.sign({id}, secret, {

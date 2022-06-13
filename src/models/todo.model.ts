@@ -6,7 +6,7 @@ const todoSchema = new Schema<ITodo>(
         user: {
             type: Schema.Types.ObjectId,
             required: true,
-            red: 'User'
+            ref: 'User'
         },
         text: {
             type: String,
