@@ -5,11 +5,20 @@ import { connectDB } from './config/db';
 import todosRouter from './routes/todos.routes';
 import usersRouter from './routes/user.routes';
 import { errorHandler } from './Middleware/error.middleware';
+const cors= require("cors");
 
-const app: Express = express();
 const port = process.env.PORT;
 
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+}
+
+
+const app: Express = express();
 connectDB();
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/todos', todosRouter);
