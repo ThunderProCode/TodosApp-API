@@ -10,7 +10,7 @@ if (process.env.MONGO_URI) {
 export const connectDB = async () => {
     try {
         const conn = await mongoose.connect(database);
-        console.log(`Mongo DB Connected : ${conn.connection.host}`);   
+        conn.connection.host;
     } catch(error) {
         console.log(error);
         process.exit(1);
