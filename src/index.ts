@@ -16,15 +16,27 @@ const corsOptions ={
     optionSuccessStatus:200,
 }
 
-
-const app: Express = express();
-
 connectDB();
+const app: Express = express();
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 app.use('/api/todos', todosRouter);
 app.use('/api/users', usersRouter);
+
+// Serve frontend
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../../TodoApp/dist')));
+    
+    app.get('*', (req, res) =>
+    res.sendFile(
+        path.resolve(__dirname, '../../', 'TodoApp', 'dist', 'index.html')
+        )
+        );
+    } else {
+        app.get('/', (req, res) => res.send('Please set to production'));
+    }
+    
 app.use(errorHandler);
 
 app.listen(port, () => {
