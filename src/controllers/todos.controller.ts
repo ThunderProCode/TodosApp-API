@@ -37,7 +37,7 @@ export const getTodo = expressAsyncHandler( async (req:Request, res:Response) =>
 // @desc    Get Todos
 // @route   GET /api/todos
 // @access  Private
-export const getTodos = expressAsyncHandler( async (req:Request, res:Response) => {
+export const getTodos = expressAsyncHandler( async (req:any, res:Response) => {
     // Check for user
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
