@@ -24,14 +24,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use('/api/todos', todosRouter);
 app.use('/api/users', usersRouter);
-
-// Serve Frontend
-
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, '../../TodoApp/dist')));
-    app.use('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../', 'TodoApp','dist','index.html')))
-}
-
 app.use(errorHandler);
 
 app.listen(port, () => {
