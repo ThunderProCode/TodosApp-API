@@ -19,15 +19,13 @@ const corsOptions ={
 
 const app: Express = express();
 
-app.get('/',(req,res) => res.send('Hello World'));
-
-// connectDB();
-// app.use(cors(corsOptions));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }))
-// app.use('/api/todos', todosRouter);
-// app.use('/api/users', usersRouter);
-// app.use(errorHandler);
+connectDB();
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
+app.use('/api/todos', todosRouter);
+app.use('/api/users', usersRouter);
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
